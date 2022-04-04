@@ -8,10 +8,14 @@
 import UIKit
 
 import RxSwift
+import RxCocoa
 import SnapKit
 
 class ViewController: UIViewController {
     
+    private let mySubject = PublishSubject<String>()
+    private let disposeBag = DisposeBag()
+    private let mytableView = UITableView()
     private let testLabel: UILabel = {
         let lb = UILabel()
         lb.text = "테스트 ㅋㅋ"
@@ -24,6 +28,11 @@ class ViewController: UIViewController {
         bt.setTitleColor(.blue, for: .normal)
         return bt
     }()
+    
+    private var myButton: UIButton = {
+        let bt = UIButton()
+        return bt
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +40,7 @@ class ViewController: UIViewController {
         configureUI()
         setLayout()
         makeObservable()
+        makeSubject()
     }
     
     private func makeObservable() {
@@ -59,7 +69,14 @@ class ViewController: UIViewController {
         }
         .subscribe(
             onNext: { print($0) }
-        )
+        ).dispose()
+    }
+    
+    private func makeSubject() {
+        // 이처럼 subject에 구독을 하고, 버튼을 누를때마다 event를 추가하면 print가 된다.
+        mySubject.subscribe(onNext: {
+            string in print(string)
+        })
     }
     
     private func configureUI() {
@@ -69,6 +86,7 @@ class ViewController: UIViewController {
     @objc
     private func changeLabel() {
         testLabel.text = "바꿈"
+        mySubject.on(.next("Is anyone here?"))
     }
 
 }
