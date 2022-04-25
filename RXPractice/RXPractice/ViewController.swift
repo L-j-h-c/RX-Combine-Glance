@@ -11,11 +11,12 @@ import RxSwift
 import RxCocoa
 import SnapKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
     
     private let mySubject = PublishSubject<String>()
     private let disposeBag = DisposeBag()
     private let mytableView = UITableView()
+    
     private let testLabel: UILabel = {
         let lb = UILabel()
         lb.text = "테스트 ㅋㅋ"
@@ -31,6 +32,23 @@ class ViewController: UIViewController {
     
     private var myButton: UIButton = {
         let bt = UIButton()
+        return bt
+    }()
+    
+    private lazy var myTextField: UITextField = {
+        let tf = UITextField()
+        tf.delegate = self
+        tf.backgroundColor = .blue
+        return tf
+    }()
+    
+    private lazy var nextButton: UIButton = {
+        let bt = UIButton()
+        bt.setTitle("다음 화면으로", for: .normal)
+        bt.addAction(UIAction(handler: { _ in
+            let nextVC = MergeSwitchLatestVC()
+            self.present(nextVC, animated: true)
+        }), for: .touchUpInside)
         return bt
     }()
 
@@ -70,13 +88,37 @@ class ViewController: UIViewController {
         .subscribe(
             onNext: { print($0) }
         ).dispose()
+        
+        myTextField.rx.controlEvent(.editingDidBegin)
+            .subscribe(onNext:{
+                print("감지")
+            })
+            .disposed(by: disposeBag)
+        
+        
+        myTextField.rx.text
+            .asDriver()
+            .drive(testLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        myTextField.rx.controlEvent(.editingDidEndOnExit)
+            .subscribe(onNext:{
+                print("된다")
+            })
+            .disposed(by: disposeBag)
+        
+
     }
     
     private func makeSubject() {
         // 이처럼 subject에 구독을 하고, 버튼을 누를때마다 event를 추가하면 print가 된다.
-        mySubject.subscribe(onNext: {
+        let subscription = mySubject.subscribe(onNext: {
             string in print(string)
         })
+        
+        DispatchQueue.main.asyncAfter(deadline: .now()+10) {
+            subscription.dispose()
+        }
     }
     
     private func configureUI() {
@@ -95,14 +137,27 @@ extension ViewController {
     private func setLayout() {
         view.addSubview(testLabel)
         view.addSubview(testButton)
+        view.addSubview(myTextField)
+        view.addSubview(nextButton)
         
         testLabel.snp.makeConstraints { make in
             make.centerY.centerX.equalToSuperview()
         }
+        
         testButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(testLabel.snp.bottom).offset(30)
         }
+        
+        myTextField.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(testButton.snp.bottom).offset(50)
+            make.width.equalTo(300)
+        }
+        
+        nextButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(myTextField.snp.bottom).offset(50)
+        }
     }
 }
-
