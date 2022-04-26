@@ -13,9 +13,7 @@ import SnapKit
 
 class TextFieldTestVC: UIViewController {
     
-    private let mySubject = PublishSubject<String>()
     private let disposeBag = DisposeBag()
-    private let mytableView = UITableView()
     
     private let testLabel: UILabel = {
         let lb = UILabel()
@@ -81,7 +79,7 @@ class TextFieldTestVC: UIViewController {
 //        .subscribe(myTextField.rx.text)
 //        .disposed(by: disposeBag)
         
-        // 텍스트필드 글자 수 표시하기
+        // MARK: 텍스트필드 글자 수 표시하기
         myTextField.rx.text.orEmpty
             .map { "\($0.count)" }
             .subscribe(testLabel.rx.text)
@@ -97,7 +95,7 @@ class TextFieldTestVC: UIViewController {
     @objc
     private func changeLabel() {
         testLabel.text = "바꿈"
-        mySubject.on(.next("Is anyone here?"))
+//        mySubject.on(.next("Is anyone here?"))
     }
 
 }

@@ -51,7 +51,24 @@ class ViewController: UIViewController, UITextFieldDelegate {
             naviVC.modalPresentationStyle = .overFullScreen
             self.present(naviVC, animated: true)
         }), for: .touchUpInside)
+        bt.backgroundColor = .systemGray
         bt.setTitleColor(UIColor.black, for: .normal)
+        bt.layer.cornerRadius = 5
+        return bt
+    }()
+    
+    private lazy var modalButton: UIButton = {
+        let bt = UIButton()
+        bt.setTitle("Operator 테스트 화면으로", for: .normal)
+        bt.addAction(UIAction(handler: { _ in
+            let nextVC = MergeSwitchLatestVC()
+            let naviVC = UINavigationController(rootViewController: nextVC)
+            naviVC.modalPresentationStyle = .overFullScreen
+            self.present(naviVC, animated: true)
+        }), for: .touchUpInside)
+        bt.backgroundColor = .systemGray
+        bt.setTitleColor(UIColor.black, for: .normal)
+        bt.layer.cornerRadius = 5
         return bt
     }()
 
@@ -142,6 +159,7 @@ extension ViewController {
         view.addSubview(testButton)
         view.addSubview(myTextField)
         view.addSubview(nextButton)
+        view.addSubview(modalButton)
         
         testLabel.snp.makeConstraints { make in
             make.centerY.centerX.equalToSuperview()
@@ -161,6 +179,11 @@ extension ViewController {
         nextButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(myTextField.snp.bottom).offset(50)
+        }
+        
+        modalButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(nextButton.snp.bottom).offset(20)
         }
     }
 }
