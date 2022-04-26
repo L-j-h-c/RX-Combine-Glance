@@ -24,6 +24,15 @@ class MergeSwitchLatestVC: UIViewController {
     let secondTFBehavior = BehaviorRelay<String>(value: " ")
     lazy var switchSource = BehaviorSubject<BehaviorRelay<String>>(value: firstTFBehavior)
     
+    private let titleLabel: UILabel = {
+        let lb = UILabel()
+        lb.text = "SwitchLatest"
+        lb.backgroundColor = .systemYellow
+        lb.layer.cornerRadius = 5
+        lb.clipsToBounds = true
+        return lb
+    }()
+    
     private let mySwitch: UISwitch = {
         let sw = UISwitch()
         return sw
@@ -60,6 +69,15 @@ class MergeSwitchLatestVC: UIViewController {
         }), for: .touchUpInside)
         bt.setTitleColor(UIColor.black, for: .normal)
         return bt
+    }()
+    
+    private let mergeLabel: UILabel = {
+        let lb = UILabel()
+        lb.text = "테스트 라벨"
+        lb.backgroundColor = .systemYellow
+        lb.layer.cornerRadius = 5
+        lb.clipsToBounds = true
+        return lb
     }()
     
     override func viewDidLoad() {
@@ -120,19 +138,35 @@ class MergeSwitchLatestVC: UIViewController {
         
         switchSource
             .switchLatest()
+            .map { "SwitchLatest : " + $0 }
             .asDriver(onErrorJustReturn: "오류")
             .drive(testLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        // MARK: Merge 기능
+//        let observable = Observable.of(firstTextField.rx.text, secondTextField.rx.text)
+        Observable.of(firstTFBehavior, secondTFBehavior)
+            .merge()
+            .map { "Merge : " + $0 }
+            .bind(to: mergeLabel.rx.text)
             .disposed(by: disposeBag)
     }
 }
 
 extension MergeSwitchLatestVC {
     private func setLayout() {
+        view.addSubview(titleLabel)
         view.addSubview(mySwitch)
         view.addSubview(testLabel)
         view.addSubview(firstTextField)
         view.addSubview(secondTextField)
         view.addSubview(nextButton)
+        view.addSubview(mergeLabel)
+        
+        titleLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview().offset(70)
+        }
         
         mySwitch.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
@@ -160,6 +194,10 @@ extension MergeSwitchLatestVC {
             make.centerX.equalToSuperview()
             make.top.equalTo(secondTextField.snp.bottom).offset(50)
         }
-
+        
+        mergeLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(nextButton.snp.bottom).offset(50)
+        }
     }
 }

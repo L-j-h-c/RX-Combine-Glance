@@ -60,6 +60,7 @@ class TextFieldTestVC: UIViewController {
     
     private func bind() {
         // MARK: 텍스트필드 입력 수 제한하기
+        
         // 1. 컨트롤 이벤트 이용
         myTextField.rx.controlEvent(.editingChanged).subscribe(onNext: { [unowned self] in
             if let text = self.myTextField.text {
@@ -80,9 +81,24 @@ class TextFieldTestVC: UIViewController {
 //        .disposed(by: disposeBag)
         
         // MARK: 텍스트필드 글자 수 표시하기
+        
         myTextField.rx.text.orEmpty
             .map { "\($0.count)" }
             .subscribe(testLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        // MARK: 텍스트필드 딜리게이트 이용하기
+        
+        myTextField.rx.controlEvent(.editingDidBegin)
+            .subscribe(onNext:{
+                print("입력 시작")
+            })
+            .disposed(by: disposeBag)
+        
+        myTextField.rx.controlEvent(.editingDidEnd)
+            .subscribe(onNext:{
+                print("입력 종료")
+            })
             .disposed(by: disposeBag)
     }
     
