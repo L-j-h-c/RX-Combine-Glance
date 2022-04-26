@@ -8,9 +8,14 @@
 import UIKit
 
 import RxSwift
+import RxCocoa
 import SnapKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
+    
+    private let mySubject = PublishSubject<String>()
+    private let disposeBag = DisposeBag()
+    private let mytableView = UITableView()
     
     private let testLabel: UILabel = {
         let lb = UILabel()
@@ -24,13 +29,56 @@ class ViewController: UIViewController {
         bt.setTitleColor(.blue, for: .normal)
         return bt
     }()
+    
+    private var myButton: UIButton = {
+        let bt = UIButton()
+        return bt
+    }()
+    
+    private lazy var myTextField: UITextField = {
+        let tf = UITextField()
+        tf.delegate = self
+        tf.backgroundColor = .blue
+        return tf
+    }()
+    
+    private lazy var nextButton: UIButton = {
+        let bt = UIButton()
+        bt.setTitle("Rx Cocoa 테스트 화면으로", for: .normal)
+        bt.addAction(UIAction(handler: { _ in
+            let nextVC = TextFieldTestVC()
+            let naviVC = UINavigationController(rootViewController: nextVC)
+            naviVC.modalPresentationStyle = .overFullScreen
+            self.present(naviVC, animated: true)
+        }), for: .touchUpInside)
+        bt.backgroundColor = .systemGray
+        bt.setTitleColor(UIColor.black, for: .normal)
+        bt.layer.cornerRadius = 5
+        return bt
+    }()
+    
+    private lazy var modalButton: UIButton = {
+        let bt = UIButton()
+        bt.setTitle("Operator 테스트 화면으로", for: .normal)
+        bt.addAction(UIAction(handler: { _ in
+            let nextVC = MergeSwitchLatestVC()
+            let naviVC = UINavigationController(rootViewController: nextVC)
+            naviVC.modalPresentationStyle = .overFullScreen
+            self.present(naviVC, animated: true)
+        }), for: .touchUpInside)
+        bt.backgroundColor = .systemGray
+        bt.setTitleColor(UIColor.black, for: .normal)
+        bt.layer.cornerRadius = 5
+        return bt
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureUI()
         setLayout()
-        makeObservable()
+//        makeObservable()
+//        makeSubject()
     }
     
     private func makeObservable() {
@@ -59,7 +107,38 @@ class ViewController: UIViewController {
         }
         .subscribe(
             onNext: { print($0) }
-        )
+        ).dispose()
+        
+        myTextField.rx.controlEvent(.editingDidBegin)
+            .subscribe(onNext:{
+                print("감지")
+            })
+            .disposed(by: disposeBag)
+        
+        
+        myTextField.rx.text
+            .asDriver()
+            .drive(testLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        myTextField.rx.controlEvent(.editingDidEndOnExit)
+            .subscribe(onNext:{
+                print("된다")
+            })
+            .disposed(by: disposeBag)
+        
+
+    }
+    
+    private func makeSubject() {
+        // 이처럼 subject에 구독을 하고, 버튼을 누를때마다 event를 추가하면 print가 된다.
+        let subscription = mySubject.subscribe(onNext: {
+            string in print(string)
+        })
+        
+        DispatchQueue.main.asyncAfter(deadline: .now()+10) {
+            subscription.dispose()
+        }
     }
     
     private func configureUI() {
@@ -69,6 +148,7 @@ class ViewController: UIViewController {
     @objc
     private func changeLabel() {
         testLabel.text = "바꿈"
+        mySubject.on(.next("Is anyone here?"))
     }
 
 }
@@ -77,14 +157,33 @@ extension ViewController {
     private func setLayout() {
         view.addSubview(testLabel)
         view.addSubview(testButton)
+        view.addSubview(myTextField)
+        view.addSubview(nextButton)
+        view.addSubview(modalButton)
         
         testLabel.snp.makeConstraints { make in
             make.centerY.centerX.equalToSuperview()
         }
+        
         testButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(testLabel.snp.bottom).offset(30)
         }
+        
+        myTextField.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(testButton.snp.bottom).offset(50)
+            make.width.equalTo(300)
+        }
+        
+        nextButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(myTextField.snp.bottom).offset(50)
+        }
+        
+        modalButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(nextButton.snp.bottom).offset(20)
+        }
     }
 }
-
