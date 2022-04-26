@@ -44,11 +44,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     private lazy var nextButton: UIButton = {
         let bt = UIButton()
-        bt.setTitle("다음 화면으로", for: .normal)
+        bt.setTitle("Rx Cocoa 테스트 화면으로", for: .normal)
         bt.addAction(UIAction(handler: { _ in
-            let nextVC = MergeSwitchLatestVC()
-            self.present(nextVC, animated: true)
+            let nextVC = TextFieldTestVC()
+            let naviVC = UINavigationController(rootViewController: nextVC)
+            naviVC.modalPresentationStyle = .overFullScreen
+            self.present(naviVC, animated: true)
         }), for: .touchUpInside)
+        bt.setTitleColor(UIColor.black, for: .normal)
         return bt
     }()
 
@@ -57,8 +60,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         configureUI()
         setLayout()
-        makeObservable()
-        makeSubject()
+//        makeObservable()
+//        makeSubject()
     }
     
     private func makeObservable() {
