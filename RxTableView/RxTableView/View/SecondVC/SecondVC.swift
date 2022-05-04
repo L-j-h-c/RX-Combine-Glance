@@ -1,5 +1,5 @@
 //
-//  MainViewController.swift
+//  SecondVC.swift
 //  RxTableView
 //
 //  Created by Junho Lee on 2022/05/04.
@@ -11,7 +11,7 @@ import SnapKit
 import RxSwift
 import RxCocoa
 
-class MainViewController: UIViewController {
+class SecondVC: UIViewController {
     
     // MARK: - Properties
     
@@ -100,7 +100,7 @@ class MainViewController: UIViewController {
     }
 }
 
-extension MainViewController: UITextFieldDelegate {
+extension SecondVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         view.endEditing(true)
         textField.text = ""

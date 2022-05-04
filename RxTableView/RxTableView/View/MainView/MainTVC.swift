@@ -60,7 +60,7 @@ class MainTVC: UITableViewCell {
     private func setLayout() {
         self.addSubview(chatLabel)
         self.addSubview(emojiLabel)
-        
+
         chatLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalToSuperview()
@@ -72,6 +72,7 @@ class MainTVC: UITableViewCell {
             make.leading.equalToSuperview().offset(20)
             make.centerY.equalToSuperview()
         }
+
     }
 
 }
