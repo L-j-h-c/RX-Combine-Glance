@@ -15,20 +15,26 @@ class SecondVC: UIViewController {
     
     // MARK: - Properties
     
+    var posts = BehaviorRelay<[Chocolate]>(value: Chocolate.ofEurope)
+    
+    var disposeBag = DisposeBag()
+    
     private let myTableView: UITableView = {
         let tv = UITableView()
         tv.backgroundColor = .systemGreen
         return tv
     }()
     
-    private let chatTextField: UITextField = {
-        let tf = UITextField()
-        tf.font = .systemFont(ofSize: 20)
-        tf.backgroundColor = .systemGray5
-        tf.layer.borderColor = UIColor.black.cgColor
-        tf.layer.cornerRadius = 6
-        tf.layer.borderWidth = 1
-        return tf
+    private let titleLabel: UILabel = {
+        let lb = UILabel()
+        lb.font = .systemFont(ofSize: 20)
+        lb.backgroundColor = .systemGray5
+        lb.layer.borderColor = UIColor.black.cgColor
+        lb.layer.cornerRadius = 6
+        lb.layer.borderWidth = 1
+        lb.text = "선택하세요"
+        lb.textAlignment = .center
+        return lb
     }()
     
     private lazy var nextButton: UIButton = {
@@ -41,10 +47,6 @@ class SecondVC: UIViewController {
         }), for: .touchUpInside)
         return bt
     }()
-
-    
-    var posts = BehaviorRelay<[Chocolate]>(value: Chocolate.ofEurope)
-    var disposeBag = DisposeBag()
     
     // MARK: - View Life Cycle
     
@@ -59,29 +61,38 @@ class SecondVC: UIViewController {
     
     private func setTableView() {
         myTableView.register(MainTVC.self, forCellReuseIdentifier: MainTVC.Identifier)
+        myTableView.register(SecondTVC.self, forCellReuseIdentifier: SecondTVC.Identifier)
         
         posts.observe(on: MainScheduler.instance)
             .scan([], accumulator: { $0 + $1 })
-            .bind(to: myTableView.rx.items(cellIdentifier: MainTVC.Identifier, cellType: MainTVC.self)) { index, item, cell in
-                cell.bind(chocolate: item)
+            .bind(to: myTableView.rx.items) { tableView, row, item in
+                if(row < 2) {
+                    guard let cell = self.myTableView.dequeueReusableCell(withIdentifier: MainTVC.Identifier) as? MainTVC else { return UITableViewCell() }
+                    cell.bind(chocolate: item)
+                    return cell
+                } else {
+                    guard let cell = self.myTableView.dequeueReusableCell(withIdentifier: SecondTVC.Identifier) as? SecondTVC else { return UITableViewCell() }
+                    cell.bind(chocolate: item)
+                    return cell
+                }
             }
             .disposed(by: disposeBag)
         
-        chatTextField.rx.controlEvent(.editingDidEnd)
-            .bind {
-                let new = Chocolate(priceInDollars: 0, countryName: self.chatTextField.text ?? "", countryFlagEmoji: "⭐")
-                self.posts.accept([new])
-            }.disposed(by: disposeBag)
+        Observable.zip(myTableView.rx.modelSelected(Chocolate.self), myTableView.rx.itemSelected)
+            .bind { (item, indexPath) in
+                self.titleLabel.text = item.countryName
+            }
+            .disposed(by: disposeBag)
         
     }
     
     private func setDelegate() {
-        chatTextField.delegate = self
+        
     }
     
     private func setLayout() {
         view.addSubview(myTableView)
-        view.addSubview(chatTextField)
+        view.addSubview(titleLabel)
         view.addSubview(nextButton)
         
         nextButton.snp.makeConstraints { make in
@@ -93,7 +104,7 @@ class SecondVC: UIViewController {
             make.edges.equalToSuperview()
         }
         
-        chatTextField.snp.makeConstraints { make in
+        titleLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(10)
             make.bottom.equalTo(view.keyboardLayoutGuide.snp.top).offset(-5)
         }

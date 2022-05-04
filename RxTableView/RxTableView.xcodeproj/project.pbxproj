@@ -21,6 +21,7 @@
 		EBC07DF028226088002C3501 /* MainTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC07DEF28226088002C3501 /* MainTVC.swift */; };
 		EBC07DF2282260A9002C3501 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC07DF1282260A9002C3501 /* Models.swift */; };
 		EBC07DF5282276D6002C3501 /* SecondVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC07DF4282276D6002C3501 /* SecondVC.swift */; };
+		EBC07DF728227E1D002C3501 /* SecondTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC07DF628227E1D002C3501 /* SecondTVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		EBC07DEF28226088002C3501 /* MainTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTVC.swift; sourceTree = "<group>"; };
 		EBC07DF1282260A9002C3501 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		EBC07DF4282276D6002C3501 /* SecondVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondVC.swift; sourceTree = "<group>"; };
+		EBC07DF628227E1D002C3501 /* SecondTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondTVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				EBC07DF4282276D6002C3501 /* SecondVC.swift */,
+				EBC07DF628227E1D002C3501 /* SecondTVC.swift */,
 			);
 			path = SecondVC;
 			sourceTree = "<group>";
@@ -203,6 +206,7 @@
 				EBC07DF028226088002C3501 /* MainTVC.swift in Sources */,
 				EBC07DD028221DE7002C3501 /* ViewController.swift in Sources */,
 				EBC07DF5282276D6002C3501 /* SecondVC.swift in Sources */,
+				EBC07DF728227E1D002C3501 /* SecondTVC.swift in Sources */,
 				EBC07DCC28221DE7002C3501 /* AppDelegate.swift in Sources */,
 				EBC07DF2282260A9002C3501 /* Models.swift in Sources */,
 				EBC07DCE28221DE7002C3501 /* SceneDelegate.swift in Sources */,
