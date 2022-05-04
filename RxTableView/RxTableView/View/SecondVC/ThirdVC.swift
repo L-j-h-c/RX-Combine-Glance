@@ -1,5 +1,5 @@
 //
-//  MainViewController.swift
+//  ThirdVC.swift
 //  RxTableView
 //
 //  Created by Junho Lee on 2022/05/04.
@@ -11,24 +11,18 @@ import SnapKit
 import RxSwift
 import RxCocoa
 
-class MainViewController: UIViewController {
+class ThirdVC: UIViewController {
     
     // MARK: - Properties
+    
+    var posts = BehaviorRelay<[Chocolate]>(value: Chocolate.ofEurope)
+    
+    var disposeBag = DisposeBag()
     
     private let myTableView: UITableView = {
         let tv = UITableView()
         tv.backgroundColor = .systemGreen
         return tv
-    }()
-    
-    private let chatTextField: UITextField = {
-        let tf = UITextField()
-        tf.font = .systemFont(ofSize: 20)
-        tf.backgroundColor = .systemGray5
-        tf.layer.borderColor = UIColor.black.cgColor
-        tf.layer.cornerRadius = 6
-        tf.layer.borderWidth = 1
-        return tf
     }()
     
     private lazy var nextButton: UIButton = {
@@ -42,10 +36,6 @@ class MainViewController: UIViewController {
         }), for: .touchUpInside)
         return bt
     }()
-
-    
-    var posts = BehaviorRelay<[Chocolate]>(value: Chocolate.ofEurope)
-    var disposeBag = DisposeBag()
     
     // MARK: - View Life Cycle
     
@@ -60,29 +50,31 @@ class MainViewController: UIViewController {
     
     private func setTableView() {
         myTableView.register(MainTVC.self, forCellReuseIdentifier: MainTVC.Identifier)
+        myTableView.register(SecondTVC.self, forCellReuseIdentifier: SecondTVC.Identifier)
+        myTableView.isEditing = true
         
         posts.observe(on: MainScheduler.instance)
-            .scan([], accumulator: { $0 + $1 })
             .bind(to: myTableView.rx.items(cellIdentifier: MainTVC.Identifier, cellType: MainTVC.self)) { index, item, cell in
                 cell.bind(chocolate: item)
             }
             .disposed(by: disposeBag)
         
-        chatTextField.rx.controlEvent(.editingDidEnd)
-            .bind {
-                let new = Chocolate(priceInDollars: 0, countryName: self.chatTextField.text ?? "", countryFlagEmoji: "⭐")
-                self.posts.accept([new])
-            }.disposed(by: disposeBag)
+        myTableView.rx.itemMoved .bind { sourceIndexPath, destinationIndexPath in
+            var items = self.posts.value
+            let item = items.remove(at: sourceIndexPath.row)
+            items.insert(item, at: destinationIndexPath.row)
+            self.posts.accept(items)
+        }
+        .disposed(by: disposeBag)
         
     }
     
     private func setDelegate() {
-        chatTextField.delegate = self
+        
     }
     
     private func setLayout() {
         view.addSubview(myTableView)
-        view.addSubview(chatTextField)
         view.addSubview(nextButton)
         
         nextButton.snp.makeConstraints { make in
@@ -93,15 +85,10 @@ class MainViewController: UIViewController {
         myTableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
-        chatTextField.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(10)
-            make.bottom.equalTo(view.keyboardLayoutGuide.snp.top).offset(-5)
-        }
     }
 }
 
-extension MainViewController: UITextFieldDelegate {
+extension ThirdVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         view.endEditing(true)
         textField.text = ""

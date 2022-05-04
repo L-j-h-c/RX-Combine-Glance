@@ -42,7 +42,8 @@ class SecondVC: UIViewController {
         bt.setTitleColor(.black, for: .normal)
         bt.setTitle("다음 화면", for: .normal)
         bt.addAction(UIAction(handler: { _ in
-            let nextVC = SecondVC()
+            let nextVC = ThirdVC()
+            nextVC.modalPresentationStyle = .fullScreen
             self.present(nextVC, animated: true)
         }), for: .touchUpInside)
         return bt
@@ -64,7 +65,6 @@ class SecondVC: UIViewController {
         myTableView.register(SecondTVC.self, forCellReuseIdentifier: SecondTVC.Identifier)
         
         posts.observe(on: MainScheduler.instance)
-            .scan([], accumulator: { $0 + $1 })
             .bind(to: myTableView.rx.items) { tableView, row, item in
                 if(row < 2) {
                     guard let cell = self.myTableView.dequeueReusableCell(withIdentifier: MainTVC.Identifier) as? MainTVC else { return UITableViewCell() }
@@ -80,7 +80,7 @@ class SecondVC: UIViewController {
         
         Observable.zip(myTableView.rx.modelSelected(Chocolate.self), myTableView.rx.itemSelected)
             .bind { (item, indexPath) in
-                self.titleLabel.text = item.countryName
+                self.titleLabel.text = "\(indexPath.row+1). \(item.countryName)"
             }
             .disposed(by: disposeBag)
         
@@ -108,13 +108,5 @@ class SecondVC: UIViewController {
             make.leading.trailing.equalToSuperview().inset(10)
             make.bottom.equalTo(view.keyboardLayoutGuide.snp.top).offset(-5)
         }
-    }
-}
-
-extension SecondVC: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        view.endEditing(true)
-        textField.text = ""
-        return true
     }
 }
