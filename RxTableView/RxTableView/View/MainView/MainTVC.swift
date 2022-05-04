@@ -14,7 +14,14 @@ class MainTVC: UITableViewCell {
     
     static let Identifier = "MainTVC"
     
-    private let guideLabel: UILabel = {
+    private let chatLabel: UILabel = {
+        let lb = UILabel()
+        lb.textColor = .black
+        lb.font = .systemFont(ofSize: 15)
+        return lb
+    }()
+    
+    private let emojiLabel: UILabel = {
         let lb = UILabel()
         lb.textColor = .black
         lb.font = .systemFont(ofSize: 15)
@@ -45,19 +52,25 @@ class MainTVC: UITableViewCell {
     
     // MARK: - Methods
     
-    func bind(text: String) {
-        guideLabel.text = text
+    func bind(chocolate: Chocolate) {
+        chatLabel.text = chocolate.countryName
+        emojiLabel.text = chocolate.countryFlagEmoji
     }
     
     private func setLayout() {
-        self.addSubview(guideLabel)
-        self.backgroundColor = .blue
+        self.addSubview(chatLabel)
+        self.addSubview(emojiLabel)
         
-        guideLabel.snp.makeConstraints { make in
+        chatLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalToSuperview()
             make.height.equalTo(50)
             make.bottom.equalToSuperview()
+        }
+        
+        emojiLabel.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(20)
+            make.centerY.equalToSuperview()
         }
     }
 

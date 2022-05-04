@@ -23,8 +23,10 @@ class MainViewController: UIViewController {
     
     private let chatTextField: UITextField = {
         let tf = UITextField()
-        tf.backgroundColor = .gray
+        tf.font = .systemFont(ofSize: 20)
+        tf.backgroundColor = .systemGray5
         tf.layer.borderColor = UIColor.black.cgColor
+        tf.layer.cornerRadius = 6
         tf.layer.borderWidth = 1
         return tf
     }()
@@ -40,6 +42,7 @@ class MainViewController: UIViewController {
         
         setTableView()
         setLayout()
+        setDelegate()
     }
     
     private func setTableView() {
@@ -48,16 +51,19 @@ class MainViewController: UIViewController {
         posts.observe(on: MainScheduler.instance)
             .scan([], accumulator: { $0 + $1 })
             .bind(to: myTableView.rx.items(cellIdentifier: MainTVC.Identifier, cellType: MainTVC.self)) { index, item, cell in
-                cell.bind(text: item.countryName)
+                cell.bind(chocolate: item)
             }
             .disposed(by: disposeBag)
         
         chatTextField.rx.controlEvent(.editingDidEnd)
             .bind {
-                let new = Chocolate(priceInDollars: 0, countryName: self.chatTextField.text ?? "", countryFlagEmoji: "")
+                let new = Chocolate(priceInDollars: 0, countryName: self.chatTextField.text ?? "", countryFlagEmoji: "⭐")
                 self.posts.accept([new])
             }.disposed(by: disposeBag)
         
+    }
+    
+    private func setDelegate() {
         chatTextField.delegate = self
     }
     
@@ -70,8 +76,8 @@ class MainViewController: UIViewController {
         }
         
         chatTextField.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
-            make.bottom.equalTo(view.keyboardLayoutGuide.snp.top)
+            make.leading.trailing.equalToSuperview().inset(10)
+            make.bottom.equalTo(view.keyboardLayoutGuide.snp.top).offset(-5)
         }
     }
 }
