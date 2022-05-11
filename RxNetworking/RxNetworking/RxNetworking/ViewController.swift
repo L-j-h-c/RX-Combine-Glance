@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var testLabel: UILabel!
     
+    @IBOutlet weak var testLabel2: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +41,8 @@ class ViewController: UIViewController {
                     break
                 }
             }.disposed(by: disposeBag)
+        
+        fetchData()
     }
     
     func downloadJson(urlString: String) -> Observable<PostData> {
@@ -87,4 +90,13 @@ class ViewController: UIViewController {
     }
     
     
+}
+
+extension ViewController {
+    func fetchData() {
+        NetworkMoya.shared.getRecentUpdateCenter { postdata, error in
+            self.testLabel2.text = postdata?.data.title
+            self.testLabel2.sizeToFit()
+        }
+    }
 }

@@ -19,6 +19,10 @@
 		EBBA1A30282BAE4E00C1F102 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = EBBA1A2F282BAE4E00C1F102 /* Moya */; };
 		EBBA1A32282BAE4E00C1F102 /* RxMoya in Frameworks */ = {isa = PBXBuildFile; productRef = EBBA1A31282BAE4E00C1F102 /* RxMoya */; };
 		EBBA1A34282BB04C00C1F102 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBA1A33282BB04C00C1F102 /* Model.swift */; };
+		EBBA1A36282BBFB500C1F102 /* BaseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBA1A35282BBFB500C1F102 /* BaseRepository.swift */; };
+		EBBA1A38282BC00000C1F102 /* BaseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBA1A37282BC00000C1F102 /* BaseAPI.swift */; };
+		EBBA1A3A282BC98700C1F102 /* NetworkMoya.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBA1A39282BC98700C1F102 /* NetworkMoya.swift */; };
+		EBBA1A3C282BC9A600C1F102 /* MoyaRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBA1A3B282BC9A600C1F102 /* MoyaRouter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +35,10 @@
 		EBBA1A1F282BABE900C1F102 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EBBA1A21282BABE900C1F102 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EBBA1A33282BB04C00C1F102 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		EBBA1A35282BBFB500C1F102 /* BaseRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRepository.swift; sourceTree = "<group>"; };
+		EBBA1A37282BC00000C1F102 /* BaseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAPI.swift; sourceTree = "<group>"; };
+		EBBA1A39282BC98700C1F102 /* NetworkMoya.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMoya.swift; sourceTree = "<group>"; };
+		EBBA1A3B282BC9A600C1F102 /* MoyaRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +79,10 @@
 				EBBA1A13282BABE800C1F102 /* AppDelegate.swift */,
 				EBBA1A15282BABE800C1F102 /* SceneDelegate.swift */,
 				EBBA1A17282BABE800C1F102 /* ViewController.swift */,
+				EBBA1A35282BBFB500C1F102 /* BaseRepository.swift */,
+				EBBA1A37282BC00000C1F102 /* BaseAPI.swift */,
+				EBBA1A39282BC98700C1F102 /* NetworkMoya.swift */,
+				EBBA1A3B282BC9A600C1F102 /* MoyaRouter.swift */,
 				EBBA1A33282BB04C00C1F102 /* Model.swift */,
 				EBBA1A19282BABE800C1F102 /* Main.storyboard */,
 				EBBA1A1C282BABE900C1F102 /* Assets.xcassets */,
@@ -164,7 +176,11 @@
 			files = (
 				EBBA1A18282BABE800C1F102 /* ViewController.swift in Sources */,
 				EBBA1A14282BABE800C1F102 /* AppDelegate.swift in Sources */,
+				EBBA1A3C282BC9A600C1F102 /* MoyaRouter.swift in Sources */,
+				EBBA1A3A282BC98700C1F102 /* NetworkMoya.swift in Sources */,
 				EBBA1A16282BABE800C1F102 /* SceneDelegate.swift in Sources */,
+				EBBA1A38282BC00000C1F102 /* BaseAPI.swift in Sources */,
+				EBBA1A36282BBFB500C1F102 /* BaseRepository.swift in Sources */,
 				EBBA1A34282BB04C00C1F102 /* Model.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
