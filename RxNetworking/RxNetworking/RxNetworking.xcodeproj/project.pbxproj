@@ -13,6 +13,12 @@
 		EBBA1A1B282BABE800C1F102 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBBA1A19282BABE800C1F102 /* Main.storyboard */; };
 		EBBA1A1D282BABE900C1F102 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBBA1A1C282BABE900C1F102 /* Assets.xcassets */; };
 		EBBA1A20282BABE900C1F102 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBBA1A1E282BABE900C1F102 /* LaunchScreen.storyboard */; };
+		EBBA1A29282BAE2F00C1F102 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = EBBA1A28282BAE2F00C1F102 /* RxCocoa */; };
+		EBBA1A2B282BAE2F00C1F102 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = EBBA1A2A282BAE2F00C1F102 /* RxRelay */; };
+		EBBA1A2D282BAE2F00C1F102 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = EBBA1A2C282BAE2F00C1F102 /* RxSwift */; };
+		EBBA1A30282BAE4E00C1F102 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = EBBA1A2F282BAE4E00C1F102 /* Moya */; };
+		EBBA1A32282BAE4E00C1F102 /* RxMoya in Frameworks */ = {isa = PBXBuildFile; productRef = EBBA1A31282BAE4E00C1F102 /* RxMoya */; };
+		EBBA1A34282BB04C00C1F102 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBA1A33282BB04C00C1F102 /* Model.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +30,7 @@
 		EBBA1A1C282BABE900C1F102 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EBBA1A1F282BABE900C1F102 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EBBA1A21282BABE900C1F102 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EBBA1A33282BB04C00C1F102 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +38,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBBA1A32282BAE4E00C1F102 /* RxMoya in Frameworks */,
+				EBBA1A2D282BAE2F00C1F102 /* RxSwift in Frameworks */,
+				EBBA1A2B282BAE2F00C1F102 /* RxRelay in Frameworks */,
+				EBBA1A30282BAE4E00C1F102 /* Moya in Frameworks */,
+				EBBA1A29282BAE2F00C1F102 /* RxCocoa in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,6 +71,7 @@
 				EBBA1A13282BABE800C1F102 /* AppDelegate.swift */,
 				EBBA1A15282BABE800C1F102 /* SceneDelegate.swift */,
 				EBBA1A17282BABE800C1F102 /* ViewController.swift */,
+				EBBA1A33282BB04C00C1F102 /* Model.swift */,
 				EBBA1A19282BABE800C1F102 /* Main.storyboard */,
 				EBBA1A1C282BABE900C1F102 /* Assets.xcassets */,
 				EBBA1A1E282BABE900C1F102 /* LaunchScreen.storyboard */,
@@ -83,6 +96,13 @@
 			dependencies = (
 			);
 			name = RxNetworking;
+			packageProductDependencies = (
+				EBBA1A28282BAE2F00C1F102 /* RxCocoa */,
+				EBBA1A2A282BAE2F00C1F102 /* RxRelay */,
+				EBBA1A2C282BAE2F00C1F102 /* RxSwift */,
+				EBBA1A2F282BAE4E00C1F102 /* Moya */,
+				EBBA1A31282BAE4E00C1F102 /* RxMoya */,
+			);
 			productName = RxNetworking;
 			productReference = EBBA1A10282BABE800C1F102 /* RxNetworking.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +131,10 @@
 				Base,
 			);
 			mainGroup = EBBA1A07282BABE800C1F102;
+			packageReferences = (
+				EBBA1A27282BAE2F00C1F102 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				EBBA1A2E282BAE4E00C1F102 /* XCRemoteSwiftPackageReference "Moya" */,
+			);
 			productRefGroup = EBBA1A11282BABE800C1F102 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -141,6 +165,7 @@
 				EBBA1A18282BABE800C1F102 /* ViewController.swift in Sources */,
 				EBBA1A14282BABE800C1F102 /* AppDelegate.swift in Sources */,
 				EBBA1A16282BABE800C1F102 /* SceneDelegate.swift in Sources */,
+				EBBA1A34282BB04C00C1F102 /* Model.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,6 +383,53 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		EBBA1A27282BAE2F00C1F102 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		EBBA1A2E282BAE4E00C1F102 /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		EBBA1A28282BAE2F00C1F102 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EBBA1A27282BAE2F00C1F102 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		EBBA1A2A282BAE2F00C1F102 /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EBBA1A27282BAE2F00C1F102 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
+		};
+		EBBA1A2C282BAE2F00C1F102 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EBBA1A27282BAE2F00C1F102 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		EBBA1A2F282BAE4E00C1F102 /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EBBA1A2E282BAE4E00C1F102 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
+		};
+		EBBA1A31282BAE4E00C1F102 /* RxMoya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EBBA1A2E282BAE4E00C1F102 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = RxMoya;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = EBBA1A08282BABE800C1F102 /* Project object */;
 }
