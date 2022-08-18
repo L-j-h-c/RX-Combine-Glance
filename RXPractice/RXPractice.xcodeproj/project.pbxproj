@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		EB0FE3D22802C6C4005D6DBA /* supporting.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0FE3D12802C6C4005D6DBA /* supporting.swift */; };
+		EB7EECF228AE269F00993EEF /* SimpleMVVMViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7EECF128AE269F00993EEF /* SimpleMVVMViewModel.swift */; };
+		EB7EECF428AE26F100993EEF /* SimpleMVVMVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7EECF328AE26F100993EEF /* SimpleMVVMVC.swift */; };
+		EB7EECF628AE27DD00993EEF /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7EECF528AE27DD00993EEF /* ViewModelType.swift */; };
 		EB7FB47227F9A3B400675CED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7FB47127F9A3B400675CED /* AppDelegate.swift */; };
 		EB7FB47427F9A3B400675CED /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7FB47327F9A3B400675CED /* SceneDelegate.swift */; };
 		EB7FB47627F9A3B400675CED /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7FB47527F9A3B400675CED /* ViewController.swift */; };
@@ -29,6 +32,9 @@
 /* Begin PBXFileReference section */
 		EB0FE3D02802C687005D6DBA /* RxPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = RxPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		EB0FE3D12802C6C4005D6DBA /* supporting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = supporting.swift; sourceTree = "<group>"; };
+		EB7EECF128AE269F00993EEF /* SimpleMVVMViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleMVVMViewModel.swift; sourceTree = "<group>"; };
+		EB7EECF328AE26F100993EEF /* SimpleMVVMVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleMVVMVC.swift; sourceTree = "<group>"; };
+		EB7EECF528AE27DD00993EEF /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		EB7FB46E27F9A3B400675CED /* RXPractice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RXPractice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB7FB47127F9A3B400675CED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB7FB47327F9A3B400675CED /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -60,6 +66,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EB7EECEE28AE267400993EEF /* RxMVVM */ = {
+			isa = PBXGroup;
+			children = (
+				EB7EECF128AE269F00993EEF /* SimpleMVVMViewModel.swift */,
+				EB7EECF328AE26F100993EEF /* SimpleMVVMVC.swift */,
+			);
+			path = RxMVVM;
+			sourceTree = "<group>";
+		};
 		EB7FB46527F9A3B400675CED = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +98,8 @@
 				EB7FB47127F9A3B400675CED /* AppDelegate.swift */,
 				EB7FB47327F9A3B400675CED /* SceneDelegate.swift */,
 				EB7FB47527F9A3B400675CED /* ViewController.swift */,
+				EB7EECF528AE27DD00993EEF /* ViewModelType.swift */,
+				EB7EECEE28AE267400993EEF /* RxMVVM */,
 				EBBAEBC22817B5D500605E62 /* RxCocoaTest */,
 				EBBAEBBF2817185300605E62 /* OpeatorTest */,
 				EB7FB47727F9A3B400675CED /* Main.storyboard */,
@@ -202,9 +219,12 @@
 				EB7FB47227F9A3B400675CED /* AppDelegate.swift in Sources */,
 				EBBAEBC62817B60900605E62 /* TableViewTestVC.swift in Sources */,
 				EBBAEBC82817B61D00605E62 /* CollectionViewTestVC.swift in Sources */,
+				EB7EECF228AE269F00993EEF /* SimpleMVVMViewModel.swift in Sources */,
 				EB0FE3D22802C6C4005D6DBA /* supporting.swift in Sources */,
 				EBBAEBCA2817B66C00605E62 /* ProgressViewTestVC.swift in Sources */,
+				EB7EECF428AE26F100993EEF /* SimpleMVVMVC.swift in Sources */,
 				EB7FB47427F9A3B400675CED /* SceneDelegate.swift in Sources */,
+				EB7EECF628AE27DD00993EEF /* ViewModelType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
