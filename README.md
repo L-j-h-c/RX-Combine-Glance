@@ -8,3 +8,4 @@
 |3|`RxCocoa TableView`, `RxDataSource`| Rx로 테이블뷰, 컬렉션뷰 구현 |22.05.04|-|
 |4|`Networking with Rx`, `Rx Moya`| Rx서버통신, RxMoya 알아보기 |22.05.11|-|
 |5|`SimpleRxMVVM`| 아주 간단한 Rx + MVVM 예제 |22.08.20|-|
+|6|`Github Actions`| 깃헙 액션 연습 |22.08.28|-|
